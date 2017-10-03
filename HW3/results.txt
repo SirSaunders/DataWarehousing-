@@ -1,0 +1,14 @@
+mysql> (SELECT COUNT(*), product_name, sku from sales_2 GROUP BY sku, product_name ORDER BY COUNT(*) DESC);
+
+
++----------+----------+
+| sku      | COUNT(*) |
++----------+----------+
+| 42357001 |     2727 | Milk
+| 42356001 |     2698 | Milk
+| 42359001 |     2667 | Milk
+| 42355001 |     2602 |
+| 42358001 |     2521 |
+| 42311001 |     1794 |
+| 42312001 |     1705 |
+| 42313001 |     1654 |

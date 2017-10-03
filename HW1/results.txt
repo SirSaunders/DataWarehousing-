@@ -1,0 +1,37 @@
+mysql>SELECT COUNT(*) from sales;
+
+total items sold: 20713660﻿﻿
+
+
+
+mysql> SELECT  COUNT(*) FROM (SELECT sku from sales group by sku) f;
+
+total unique SKUs purchased: 2074
+
+
+
+mysql> SELECT  COUNT(*) FROM (SELECT customer_number from sales group by date, customer_number) f;
+
+total number of customers: 414596
+
+
+mysql> (SELECT sku from sales GROUP BY sku ORDER BY COUNT(*) DESC);
+
+
+Rowan Dairy|1.00% Milk|1/2 gal|Milk|42356001|$1.89
+
+Rowan Dairy|Whole Milk Milk|1 gal|Milk|42359001|$3.69
+
+Rowan Dairy|2.00% Milk|1 gal|Milk|42357001|$3.69
+
+Rowan Dairy|1.00% Milk|1 gal|Milk|42355001|$3.69
+
+Rowan Dairy|2.00% Milk|1/2 gal|Milk|42358001|$1.89
+
+General Mills|Cheerios Apple Cinnamon Cereal|12.9 oz|Cereal|43384001|$4.39
+
+Safeway Kitchens|Honey Nut Toasted Oats Cereal|12.25 oz|Cereal|42348001|$2.19
+
+Kelloggs|Special K Chocolate Almond Cereal|12.7 oz|Cereal|42930001|$2.50
+
+General Mills|Chex Chocolate Cereal|14.25 oz|Cereal|43397001|$4.69

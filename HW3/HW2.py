@@ -2,23 +2,25 @@ import random
 import datetime
 import pandas as pd
 import csv
-import pymysql
+# import pymysql
+import MySQLdb as pymysql
 
 
 def populateItems():
     resultArray = []
-    with open('Products2.txt') as f:
+    with open('/Users/johnathansaunders/Documents/fall_17/DataWarehousing-/HW3/Products2.txt') as f:
         content = f.readlines()
         lines = [line.rstrip('\n') for line in content]
+
         for i in range(0, len(lines) - 1):
-            newArry = str(lines[i]).split('|')
+            newArry = str(lines[i]).split('\t')
             resultArray.append(newArry)
 
     return resultArray
 
 
 items = populateItems()
-itemsDataFrame = pd.read_csv('Products1.txt', sep="|")
+itemsDataFrame = pd.read_csv('/Users/johnathansaunders/Documents/fall_17/DataWarehousing-/HW3/Products1.txt', sep="\t")
 
 
 def getItemsFromItemType(itemType):
@@ -35,8 +37,8 @@ jellyItems = getItemsFromItemType('Jelly/Jam')
 peanutButterItems = getItemsFromItemType('Peanut Butter')
 breadItems = getItemsFromItemType('Bread')
 salesSQL = ("INSERT INTO `sales_2` "
-            "(`date`, `customer_number`,`sku`,`price` ) "
-            "VALUES (%s, %s, %s, %s)")
+            "(`date`, `customer_number`,`sku`,`price`,`product_name`,`itemType` ) "
+            "VALUES (%s, %s, %s, %s,%s,%s)")
 
 
 def connectToDB():
@@ -56,15 +58,21 @@ def connectToDB():
 connection = connectToDB()
 
 
+def checkItemsSupply():
+    for item in items:
+        while int(item[6]) < 28:
+            item[6] = str(int(item[6]) + 12)
+            item[7] = str(int(item[7]) + 1)
+
+
 def getMilk():
     rand = random.randrange(0, len(milkItems) - 1)
     return milkItems[rand]
 
 
-def writeRecord(date, j, SKU, price):
+def writeRecord(date, j, SKU, price, product_Name, itemType):
     price = str(price).replace('$', '')
-    with connection.cursor() as cursor:
-        cursor.execute(salesSQL, (long(date), long(j), long(SKU), float(price) * 1.1))
+    connection.cursor().execute(salesSQL, (long(date), long(j), long(SKU), float(price) * 1.1, product_Name, itemType))
 
 
 def myDate(i):
@@ -106,8 +114,9 @@ def simulateGroceryData():
     cDate1 = 20170101
     cMaxItems = 100
     cWeekendIncrease = 50
-    for i in range(0, 364):
+    for i in range(0, 14):
         date = myDate(i);
+
         custCount = random.randrange(cCustomersLo, cCustomersHi, cWeekendIncrease)
         for j in range(1, custCount):
             k = 0
@@ -115,34 +124,35 @@ def simulateGroceryData():
             if random.randrange(1, 100) <= 70:
                 milk = getMilk()
 
-                writeRecord(date, j, milk['SKU'], milk['BasePrice'])
+                writeRecord(date, j, milk['SKU'], milk['BasePrice'], milk['Product Name'], milk['itemType'])
                 k = k + 1
                 if random.randrange(1, 100) <= 50:
                     cereal = getCereal()
-                    writeRecord(date, j, cereal['SKU'], cereal['BasePrice'])
+                    writeRecord(date, j, cereal['SKU'], cereal['BasePrice'], cereal['Product Name'], cereal['itemType'])
                     k = k + 1
             else:
                 if random.randrange(1, 100) <= 5:
                     cereal = getCereal()
-                    writeRecord(date, j, cereal['SKU'], cereal['BasePrice'])
+                    writeRecord(date, j, cereal['SKU'], cereal['BasePrice'], cereal['Product Name'], cereal['itemType'])
                     k = k + 1
 
-            if random.randrange(1, 100) <= 50:
-                bread = getBread()
-                writeRecord(date, j, bread['SKU'], bread['BasePrice'])
+            if random.randrange(1, 100) <= 30:
+                jelly = getJelly()
+                writeRecord(date, j, jelly['SKU'], jelly['BasePrice'], jelly['Product Name'], jelly['itemType'])
                 k = k + 1
                 if random.randrange(1, 100) <= 50:
-                    jelly = getJelly()
-                    writeRecord(date, j, jelly['SKU'], jelly['BasePrice'])
+                    peanutButter = getPeanutButter()
+                    writeRecord(date, j, peanutButter['SKU'], peanutButter['BasePrice'],
+                                peanutButter['Product Name'], peanutButter['itemType'])
                     k = k + 1
-                    if random.randrange(1, 100) <= 50:
-                        peanutButter = getPeanutButter()
-                        writeRecord(date, j, peanutButter['SKU'], peanutButter['BasePrice'])
-                        k = k + 1
+                if random.randrange(1, 100) <= 50:
+                    bread = getBread()
+                    writeRecord(date, j, bread['SKU'], bread['BasePrice'], bread['Product Name'], bread['itemType'])
+                    k = k + 1
 
             for m in range(k, myItems):
                 item = getRandomItem()
-                writeRecord(date, j, item[4], item[5])
+                writeRecord(date, j, item[4], item[5], item[1], str(item[3]))
         connection.commit()
 
 
