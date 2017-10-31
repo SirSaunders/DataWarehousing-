@@ -1,5 +1,6 @@
 mysql> (SELECT COUNT(*), product_name, sku from sales_2 GROUP BY sku, product_name ORDER BY COUNT(*) DESC);
-
+ (SELECT COUNT(*), itemType from sales_3 GROUP BY itemType order by count(*) asc);
+(SELECT COUNT(*), itemType from (SELECT COUNT(*), itemType,sku from sales_2 group by sku,itemType) g  group by itemType);
 
 +----------+----------+
 | sku      | COUNT(*) |

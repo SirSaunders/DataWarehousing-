@@ -1,37 +1,30 @@
-mysql>SELECT COUNT(*) from sales;
-
-total items sold: 20713660﻿﻿
-
+mysql>SELECT COUNT(*) from sales_3;
+total items sold: 21562991﻿﻿
 
 
-mysql> SELECT  COUNT(*) FROM (SELECT sku from sales group by sku) f;
 
+
+mysql> SELECT  COUNT(*) FROM (SELECT sku from sales_2 group by sku) f;
 total unique SKUs purchased: 2074
 
 
 
-mysql> SELECT  COUNT(*) FROM (SELECT customer_number from sales group by date, customer_number) f;
-
-total number of customers: 414596
-
-
-mysql> (SELECT sku from sales GROUP BY sku ORDER BY COUNT(*) DESC);
+mysql> SELECT  COUNT(*) FROM (SELECT customer_number from sales_3 group by date, customer_number) f;
+total number of customers: 415735
 
 
-Rowan Dairy|1.00% Milk|1/2 gal|Milk|42356001|$1.89
-
-Rowan Dairy|Whole Milk Milk|1 gal|Milk|42359001|$3.69
-
-Rowan Dairy|2.00% Milk|1 gal|Milk|42357001|$3.69
-
-Rowan Dairy|1.00% Milk|1 gal|Milk|42355001|$3.69
-
-Rowan Dairy|2.00% Milk|1/2 gal|Milk|42358001|$1.89
-
-General Mills|Cheerios Apple Cinnamon Cereal|12.9 oz|Cereal|43384001|$4.39
-
-Safeway Kitchens|Honey Nut Toasted Oats Cereal|12.25 oz|Cereal|42348001|$2.19
-
-Kelloggs|Special K Chocolate Almond Cereal|12.7 oz|Cereal|42930001|$2.50
-
-General Mills|Chex Chocolate Cereal|14.25 oz|Cereal|43397001|$4.69
+mysql> SELECT sku,max(total_cases_ordered),product_name from sales_3 GROUP BY sku,product_name ORDER BY COUNT(*) Desc;
++----------+--------------------------+---------------------------------------------------------------------+-------------------------+
+| sku      | max(total_cases_ordered) | product_name                                                        |  Estimated OrderedCases |
++----------+--------------------------+---------------------------------------------------------------------+-------------------------+
+| 42358001 |                     4131 | 2.00% Milk                                                          |  4116.388889            |
+| 42356001 |                     4131 | 1.00% Milk                                                          |  4116.388889            |
+| 42359001 |                     4120 | Whole Milk Milk                                                     |  4116.388889            |
+| 42355001 |                     4114 | 1.00% Milk                                                          |  4116.388889            |
+| 42360001 |                     4084 | Whole Milk Milk                                                     |  4116.388889            |
+| 42357001 |                     4078 | 2.00% Milk                                                          |  4116.388889            |
+| 42314001 |                     2636 | Squeeze Jelly Grape                                                 |  2646.25                |
+| 42311001 |                     2639 | Jam Grape                                                           |  2646.25                |
+| 42312001 |                     2633 | Jam Strawberry                                                      |  2646.25                |
+| 42313001 |                     2624 | Jelly Grape                                                         |  2646.25                |
++----------+--------------------------+---------------------------------------------------------------------+-------------------------+

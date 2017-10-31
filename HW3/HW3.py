@@ -14,7 +14,7 @@ cerealSupply = 101
 
 def populateItems():
     resultArray = []
-    with open('/Users/johnathansaunders/Documents/fall_17/DataWarehousing-/HW3/Products2.txt') as f:
+    with open('Products2.txt') as f:
         content = f.readlines()
         lines = [line.rstrip('\n') for line in content]
 
@@ -26,7 +26,7 @@ def populateItems():
 
 
 items = populateItems()
-itemsDataFrame = pd.read_csv('/Users/johnathansaunders/Documents/fall_17/DataWarehousing-/HW3/Products1.txt', sep="\t")
+itemsDataFrame = pd.read_csv('Products1.txt', sep="\t")
 
 
 def getItemsFromItemType(itemType):
@@ -42,9 +42,9 @@ cerealItems = getItemsFromItemType('Cereal')
 jellyItems = getItemsFromItemType('Jelly/Jam')
 peanutButterItems = getItemsFromItemType('Peanut Butter')
 breadItems = getItemsFromItemType('Bread')
-salesSQL = ("INSERT INTO `sales_2` "
-            "(`date`, `customer_number`,`sku`,`price`,`product_name`,`itemType` ) "
-            "VALUES (%s, %s, %s, %s,%s,%s)")
+salesSQL = ("INSERT INTO `sales_3` "
+            "(`date`, `customer_number`,`sku`,`price`,`product_name`,`itemType`,`items_left`,`total_cases_ordered` ) "
+            "VALUES (%s, %s, %s, %s,%s,%s,%s,%s)")
 
 
 def connectToDB():
@@ -96,9 +96,10 @@ def getMilk():
     return None
 
 
-def writeRecord(date, j, SKU, price, product_Name, itemType):
+def writeRecord(date, j, SKU, price, product_Name, itemType, items_left,total_cases_ordered ):
     price = str(price).replace('$', '')
-    connection.cursor().execute(salesSQL, (long(date), long(j), long(SKU), float(price) * 1.1, product_Name, itemType))
+    connection.cursor().execute(salesSQL, (long(date), long(j), long(SKU), float(price) * 1.1, product_Name, itemType, items_left, total_cases_ordered))
+
 
 
 
@@ -184,7 +185,7 @@ def simulateGroceryData():
     cDate1 = 20170101
     cMaxItems = 100
     cWeekendIncrease = 50
-    for i in range(0, 14):
+    for i in range(0, 365):
         date = myDate(i);
 
         custCount = random.randrange(cCustomersLo, cCustomersHi, cWeekendIncrease)
@@ -194,50 +195,49 @@ def simulateGroceryData():
             if random.randrange(1, 100) <= 70:
                 milk = getMilk()
                 if (not milk is None):
-                    writeRecord(date, j, milk['SKU'], milk['BasePrice'], milk['Product Name'], milk['itemType'])
+                    writeRecord(date, j, milk['SKU'], milk['BasePrice'], milk['Product Name'], milk['itemType'], milk['ItemsLeft'],milk['TotalCasesOrderd'])
                     k = k + 1
                     if random.randrange(1, 100) <= 50:
                         cereal = getCereal()
                         if (not cereal is None):
                             writeRecord(date, j, cereal['SKU'], cereal['BasePrice'], cereal['Product Name'],
-                                        cereal['itemType'])
+                                        cereal['itemType'], cereal['ItemsLeft'],cereal['TotalCasesOrderd'])
                             k = k + 1
             else:
                 if random.randrange(1, 100) <= 5:
                     cereal = getCereal()
                     if (not cereal is None):
                         writeRecord(date, j, cereal['SKU'], cereal['BasePrice'], cereal['Product Name'],
-                                    cereal['itemType'])
+                                    cereal['itemType'], cereal['ItemsLeft'],cereal['TotalCasesOrderd'])
                         k = k + 1
 
             if random.randrange(1, 100) <= 30:
                 jelly = getJelly()
                 if (not jelly is None):
-                    writeRecord(date, j, jelly['SKU'], jelly['BasePrice'], jelly['Product Name'], jelly['itemType'])
+                    writeRecord(date, j, jelly['SKU'], jelly['BasePrice'], jelly['Product Name'], jelly['itemType'], jelly['ItemsLeft'],jelly['TotalCasesOrderd'])
                     k = k + 1
                     if random.randrange(1, 100) <= 50:
                         peanutButter = getPeanutButter()
                         if (not peanutButter is None):
                             writeRecord(date, j, peanutButter['SKU'], peanutButter['BasePrice'],
-                                        peanutButter['Product Name'], peanutButter['itemType'])
+                                        peanutButter['Product Name'], peanutButter['itemType'], peanutButter['ItemsLeft'],peanutButter['TotalCasesOrderd'])
                             k = k + 1
                     if random.randrange(1, 100) <= 50:
                         bread = getBread()
                         if (not bread is None):
                             writeRecord(date, j, bread['SKU'], bread['BasePrice'], bread['Product Name'],
-                                        bread['itemType'])
+                                        bread['itemType'], bread['ItemsLeft'],bread['TotalCasesOrderd'])
                             k = k + 1
 
             for m in range(k, myItems):
                 item = getRandomItem()
-                writeRecord(date, j, item[4], item[5], item[1], str(item[3]))
+                writeRecord(date, j, item[4], item[5], item[1], str(item[3]), str(item[6]), str(item[7]))
         connection.commit()
 
 
 def main():
     simulateGroceryData()
     connection.close()
-    print items
 
 
 main()
