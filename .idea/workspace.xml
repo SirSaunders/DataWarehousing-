@@ -2,28 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e6b2478c-f8d7-4060-8b2b-0b94206e8142" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ETL_Group/ETL_Group/Johnathan_Saunders_HW2.xlsx" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ETL_Group/ETL_Group/Workbook1.xlsx" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ETL_Group/ETL_Fast_MySQL_Upload_Template.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ETL_Group/ETL_Group/.idea/HW3.iml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ETL_Group/ETL_Group/.idea/dbnavigator.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ETL_Group/ETL_Group/.idea/inspectionProfiles/profiles_settings.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ETL_Group/ETL_Group/.idea/misc.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ETL_Group/ETL_Group/.idea/modules.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ETL_Group/ETL_Group/.idea/preferred-vcs.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ETL_Group/ETL_Group/.idea/workspace.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ETL_Group/ETL_Group/HW3.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ETL_Group/ETL_Group/Products1.csv" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ETL_Group/ETL_Group/Products1.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ETL_Group/ETL_Group/Products2.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ETL_Group/ETL_Group/results.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ETL_Group/ETL_Group/schema.sql" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ETL_Group/schema_template.sql" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/HW1/results.txt" afterPath="$PROJECT_DIR$/HW1/results.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/HW2/results.txt" afterPath="$PROJECT_DIR$/HW2/results.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/HW3/HW3.py" afterPath="$PROJECT_DIR$/HW3/HW3.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/HW3/results.txt" afterPath="$PROJECT_DIR$/HW3/results.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ETL_Group/ETL_Group/HW3.py" afterPath="$PROJECT_DIR$/ETL_Group/ETL_Group/HW3.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -76,11 +55,11 @@
       <file leaf-file-name="HW3.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/ETL_Group/ETL_Group/HW3.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="135">
-              <caret line="9" column="35" lean-forward="false" selection-start-line="9" selection-start-column="35" selection-end-line="9" selection-end-column="35" />
+            <state relative-caret-position="270">
+              <caret line="31" column="123" lean-forward="false" selection-start-line="31" selection-start-column="123" selection-end-line="31" selection-end-column="123" />
               <folding>
                 <element signature="e#0#13#0" expanded="true" />
-                <marker date="1509470667000" expanded="true" signature="1184:1385" ph="INSERT INTO `john_transactions`... " />
+                <marker date="1509471412000" expanded="true" signature="1344:1545" ph="INSERT INTO `john_transactions`... " />
               </folding>
             </state>
           </provider>
@@ -610,7 +589,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1366" height="768" extended-state="0" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="DB Browser" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -618,9 +597,9 @@
       <window_info id="DB Execution Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.260745" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.260745" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Execute Anonymous" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24355301" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24355301" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="FAQ Robot" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.168429" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="MaxCompute Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -1065,11 +1044,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/ETL_Group/ETL_Group/HW3.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="9" column="35" lean-forward="false" selection-start-line="9" selection-start-column="35" selection-end-line="9" selection-end-column="35" />
+        <state relative-caret-position="270">
+          <caret line="31" column="123" lean-forward="false" selection-start-line="31" selection-start-column="123" selection-end-line="31" selection-end-column="123" />
           <folding>
             <element signature="e#0#13#0" expanded="true" />
-            <marker date="1509470667000" expanded="true" signature="1184:1385" ph="INSERT INTO `john_transactions`... " />
+            <marker date="1509471412000" expanded="true" signature="1344:1545" ph="INSERT INTO `john_transactions`... " />
           </folding>
         </state>
       </provider>

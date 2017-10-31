@@ -7,7 +7,7 @@ import csv
 # import pymysql
 import MySQLdb as pymysql
 
-daysSupply = 127 #85 3.5 days = 127
+daysSupply = 127  # 85 3.5 days = 127
 milkDaysSupply = 812
 breadDaysSupply = 174
 peanutButterSupply = 174
@@ -29,9 +29,11 @@ def populateItems():
 
 
 items = populateItems()
-itemsDataFrame = pd.read_csv('Products1.txt', sep="\t")
+itemsDataFrame = pd.read_csv(
+    'Products1.txt', sep="\t")
 insertArry = []
-threadsAry = []
+uploadThreadsAry = []
+
 
 
 def getItemsFromItemType(itemType):
@@ -89,17 +91,6 @@ def itemsNotGone(items):
     return False
 
 
-def getMilk():
-    if (itemsNotGone(milkItems)):
-        rand = random.randrange(0, len(milkItems))
-        item = milkItems[rand]
-        if (int(item['ItemsLeft']) < 1):
-            return getMilk()
-        item['ItemsLeft'] = str(int(item['ItemsLeft']) - 1)
-        return item
-    return None
-
-
 def insertRecord(date, j, SKU, price, product_Name, itemType, items_left, total_cases_ordered):
     price = str(price).replace('$', '')
     insertArry.append(
@@ -118,7 +109,7 @@ def writeRecords():
             print'dB upload finished'
 
     thread = MyThread()
-    threadsAry.append(thread)  # store all threads in a list for idendification later
+    uploadThreadsAry.append(thread)  # store all threads in a list for idendification later
     thread.daemon = True
     thread.start()
     insertArry[:] = []  # make insertArry empty
@@ -171,59 +162,20 @@ def getRandomItem():
     item = items[index]
     type = item[3]
     # if a special item or empty get a different item
-    if (int(item[6]) < 1 or type == 'Milk' or type == 'Bread' or type == 'Jelly/Jam' or type == 'Cereal' or type == 'Peanut Butter'):
+    if (int(item[
+                6]) < 1 or type == 'Milk' or type == 'Bread' or type == 'Jelly/Jam' or type == 'Cereal' or type == 'Peanut Butter'):
         return getRandomItem()
     item[6] = str(int(item[6]) - 1)
     return item
 
 
-def getBread():
+def getSpecailItem(specialAry):
     try:
-        if (itemsNotGone(breadItems)):
-            rand = random.randrange(0, len(breadItems))
-            item = breadItems[rand]
+        if (itemsNotGone(specialAry)):
+            rand = random.randrange(0, len(specialAry))
+            item = specialAry[rand]
             if (int(item['ItemsLeft']) < 1):
-                return getBread()
-            item['ItemsLeft'] = str(int(item['ItemsLeft']) - 1)
-            return item
-    except Exception,e:
-        print(e)
-    return None
-def getSpecailItem():
-    def getSpecailItem(specialAry):
-        try:
-            if (itemsNotGone(specialAry)):
-                rand = random.randrange(0, len(specialAry))
-                item = breadItems[rand]
-                if (int(item['ItemsLeft']) < 1):
-                    return getSpecailItem(specialAry)
-                item['ItemsLeft'] = str(int(item['ItemsLeft']) - 1)
-                return item
-        except Exception, e:
-            print(e)
-        return None
-
-def getJelly():
-    try:
-        if (itemsNotGone(jellyItems)):
-            rand = random.randrange(0, len(jellyItems))
-            item = jellyItems[rand]
-            if int(item['ItemsLeft']) < 1:
-                return getJelly()
-            item['ItemsLeft'] = str(int(item['ItemsLeft']) - 1)
-            return item
-    except Exception, e:
-        print(e)
-    return None
-
-
-def getPeanutButter():
-    try:
-        if (itemsNotGone(peanutButterItems)):
-            rand = random.randrange(0, len(jellyItems))
-            item = peanutButterItems[rand]
-            if (int(item['ItemsLeft']) < 1):
-                return getPeanutButter()
+                return getSpecailItem(specialAry)
             item['ItemsLeft'] = str(int(item['ItemsLeft']) - 1)
             return item
     except Exception, e:
@@ -251,50 +203,51 @@ def simulateGroceryData():
             k = 0
             myItems = random.randrange(1, cMaxItems)
             if random.randrange(1, 100) <= 70:
-                milk = getMilk()
+                milk = getSpecailItem(milkItems)
                 if (not milk is None):
                     insertRecord(date, j, milk['SKU'], milk['BasePrice'], milk['Product Name'], milk['itemType'],
                                  milk['ItemsLeft'], milk['TotalCasesOrderd'])
                     k = k + 1
                     if random.randrange(1, 100) <= 50:
-                        cereal = getCereal()
+                        cereal = getSpecailItem(cerealItems)
                         if (not cereal is None):
                             insertRecord(date, j, cereal['SKU'], cereal['BasePrice'], cereal['Product Name'],
                                          cereal['itemType'], cereal['ItemsLeft'], cereal['TotalCasesOrderd'])
                             k = k + 1
             else:
                 if random.randrange(1, 100) <= 5:
-                    cereal = getCereal()
+                    cereal = getSpecailItem(cerealItems)
                     if (not cereal is None):
                         insertRecord(date, j, cereal['SKU'], cereal['BasePrice'], cereal['Product Name'],
                                      cereal['itemType'], cereal['ItemsLeft'], cereal['TotalCasesOrderd'])
                         k = k + 1
 
             if random.randrange(1, 100) <= 30:
-                jelly = getJelly()
+                jelly = getSpecailItem(jellyItems)
                 if (not jelly is None):
                     insertRecord(date, j, jelly['SKU'], jelly['BasePrice'], jelly['Product Name'], jelly['itemType'],
                                  jelly['ItemsLeft'], jelly['TotalCasesOrderd'])
                     k = k + 1
                     if random.randrange(1, 100) <= 50:
-                        peanutButter = getPeanutButter()
+                        peanutButter = getSpecailItem(peanutButterItems)
                         if (not peanutButter is None):
                             insertRecord(date, j, peanutButter['SKU'], peanutButter['BasePrice'],
                                          peanutButter['Product Name'], peanutButter['itemType'],
                                          peanutButter['ItemsLeft'], peanutButter['TotalCasesOrderd'])
                             k = k + 1
                     if random.randrange(1, 100) <= 50:
-                        bread = getBread()
+                        bread = getSpecailItem(breadItems)
                         if (not bread is None):
                             insertRecord(date, j, bread['SKU'], bread['BasePrice'], bread['Product Name'],
                                          bread['itemType'], bread['ItemsLeft'], bread['TotalCasesOrderd'])
                             k = k + 1
 
             for m in range(k, myItems):
+                r = 1
                 item = getRandomItem()
                 insertRecord(date, j, item[4], item[5], item[1], str(item[3]), str(item[6]), str(item[7]))
 
-        #writeRecords()
+                # writeRecords()
 
 
 def main():
@@ -302,7 +255,7 @@ def main():
     simulateGroceryData()
     # goes through list of threads and joins them
     # ensures we wait until they all finish
-    for thread in threadsAry:
+    for thread in uploadThreadsAry:
         thread.join()
 
 
