@@ -31,11 +31,14 @@ def insertRecord(date, j, SKU, price, product_Name, itemType, items_left, total_
 
 #writes information to server Database on other thread
 def writeRecords():
-    execArry = insertArry # did this so nothing gets messed up when writing using another thread
+
     class MyThread(threading.Thread):
         def run(self):
+            class execArry(object):
+                arry = insertArry  # did this so nothing gets messed up when writing using another thread
+
             connection = connectToDB()
-            connection.cursor().executemany(salesSQL, execArry)
+            connection.cursor().executemany(salesSQL, execArry.arry)
             connection.commit()
             connection.close()
             print'dB upload finished'

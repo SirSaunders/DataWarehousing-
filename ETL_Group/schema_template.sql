@@ -4,8 +4,6 @@ CREATE TABLE john_transactions (
   date  bigint(20),
   customer_number   bigint(20),
   sku    bigint(20),
-  product_name VARCHAR(120),
-  itemType VARCHAR(120),
   price   FLOAT,
   items_left bigint(20),
   total_cases_ordered bigint(20),
